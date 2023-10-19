@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation</title>
+  </head>
+  <body style="background-color: #212121; color: #fff">
+    <ul class="language">
+      <li>JavaScript</li>
+    </ul>
+  </body>
+  <script>
+    // noraml way to create and element which is not optimized
+
+    function addLanguages(langName) {
+      let li = document.createElement("li");
+      li.innerText= langName;
+      document.querySelector(".language").appendChild(li);
+    }
+    addLanguage("python");
+
+    // optimized way to add element
+    function addLanguage(languageName) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(languageName));
+      document.querySelector(".language").appendChild(li);
+    }
+    addLanguage("GOlang");
+
+    // edit
+    const secondLang = document.querySelector("li:nth-child(2)");
+    //    secondLang.innerHTML = 'Mojo';
+    const newli = document.createElement("li");
+    newli.textContent = "Ruby";
+    secondLang.replaceWith(newli);
+
+    // edit2
+    const firstLang = document.querySelector("li:first-child");
+    firstLang.outerHTML = "<li>TypeScript</li>";
+
+    // remove
+    const lastLi = document.querySelector("li:last-child");
+    lastLi.remove();
+  </script>
+</html>
