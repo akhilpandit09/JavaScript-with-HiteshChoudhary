@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request</title>
+    <style>
+        .user-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+        }
+
+        .user-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .user-username {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .user-details {
+            margin-top: 20px;
+        }
+
+        .user-details > div {
+            margin: 10px 0;
+        }
+
+        .user-details label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="user-card">
+        <img class="user-avatar" src="" alt="User Photo">
+        <div class="user-name"></div>
+        <div class="user-username"></div>
+        <div class="user-details">
+            <div>
+                <label id="follower"></label>
+            </div>
+            <div>
+                <label id="following"></label> 
+            </div>
+            <div>
+                <label id="Location"></label> 
+            </div>
+            <div>
+                <label id="user-id"></label> 
+            </div>
+            <div>
+                <label id="email"></label> 
+            </div>
+        </div>
+    <script>
+        const requesUrl = 'https://api.github.com/users/hiteshchoudhary';
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', requesUrl, true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                const data = JSON.parse(this.responseText);
+                // console.log(`Name: ${data.name}`)
+                // const userAvatarURL = data.avatar_url;
+                const avatar_url = "https://avatars.githubusercontent.com/u/64522940?v=4";
+                const avatarElement = document.querySelector('.user-avatar');
+                avatarElement.src = data.avatar_url;
+
+                document.querySelector('.user-username').innerHTML = `<b>Username:</b> ${data.login}`;
+                document.querySelector('.user-name').innerHTML= `${data.name}`;
+                document.querySelector('#follower').innerHTML= `<b>Followers:</b> ${data.followers}`;
+                document.querySelector('#following').innerHTML= `<b>Following:</b> ${data.following}`;
+                document.querySelector('#Location').innerHTML= `<b>Location:</b> ${data.location}`;
+                document.querySelector('#user-id').innerHTML= `<b>User ID:</b> ${data.id}`;
+                document.querySelector('#email').innerHTML= `<b>Email:</b> ${data.email}`;
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
