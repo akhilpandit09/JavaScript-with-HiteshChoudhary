@@ -1,4 +1,4 @@
-// basically promise used in Database calls, cryptography, nad network call
+// basically promise used in Database calls, cryptography, and network call
 
 
 // here we only create a promise 
@@ -19,6 +19,7 @@ promiseone
 new Promise(function (resolve, reject){
     setTimeout(function(){
         console.log('Async task 2');
+        resolve()
     }, 1000);
 })
 .then(function(){
